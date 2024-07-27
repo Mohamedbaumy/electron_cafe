@@ -1,0 +1,56 @@
+name: LAB SYSTEM
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build_and_release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Electron App
+        run: npm run build:win
+        env:
+           GH_TOKEN: ${{ secrets.TOKEN }}
+
+      - name: Determine artifact path
+        id: artifact
+        run: |
+          echo "filename=dist/*.*" >> $GITHUB_OUTPUT
+          echo "appName=$(basename dist/*.*)" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Create Release 
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref }} 
+          release_name: Release ${{ github.ref }}
+          body: This is a release description.
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+
+      - name: Upload Release Asset
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.TOKEN }}
+          file: ./${{ steps.artifact.outputs.filename }}
+          asset_name: ${{ steps.artifact.outputs.appName }}
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true

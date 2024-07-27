@@ -1,0 +1,22 @@
+{
+  "name": "",
+  "device_name": null,
+  "kit_name": null,
+  "unit_name": "pg/mL",
+  "result": {
+    "checked": true,
+    "name of test": ""
+  },
+  "hash": "17191750488032397",
+  "range": ["array of ranges"],
+  "gender": "",
+  "age": {
+    "low": "",
+    "high": "",
+    "low_unit": "",
+    "high_unit": ""
+  },
+  "result_type": "",
+  "options": [],
+  "right_options": []
+}

@@ -1,0 +1,5 @@
+provider: github
+owner: Mohamedbaumy
+repo: electron_lab
+private: true
+token: "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"
