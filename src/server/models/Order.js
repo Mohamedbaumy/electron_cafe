@@ -1,6 +1,7 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/db.js';
-import Customer from './Customer.js';
+import { DataTypes } from 'sequelize'
+import sequelize from '../config/db.js'
+import User from './User.js'
+import Table from './Table.js'
 
 const Order = sequelize.define(
   'Order',
@@ -10,20 +11,38 @@ const Order = sequelize.define(
       primaryKey: true,
       autoIncrement: true
     },
-    customer_id: {
+    user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: Customer,
+        model: User,
         key: 'id'
       }
     },
-    date: DataTypes.DATE,
-    total_price: DataTypes.DECIMAL
+    table_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Table,
+        key: 'id'
+      }
+    },
+    status: {
+      type: DataTypes.ENUM,
+      values: ['quick', 'pending', 'debt'],
+      defaultValue: 'quick'
+    },
+    total_quantity: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    total_price: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0.0
+    }
   },
   {
     tableName: 'orders',
-    timestamps: false
+    timestamps: true
   }
-);
+)
 
-export default Order;
+export default Order

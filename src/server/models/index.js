@@ -8,6 +8,7 @@ import Category from './Category.js'
 import Discount from './Discount.js'
 import Order from './Order.js'
 import OrderDetail from './OrderDetail.js'
+import Table from './Table.js'
 
 // Associations
 User.hasOne(Employee, { foreignKey: 'user_id' })
@@ -37,6 +38,9 @@ OrderDetail.belongsTo(Order, { foreignKey: 'order_id' })
 Product.hasMany(OrderDetail, { foreignKey: 'product_id' })
 OrderDetail.belongsTo(Product, { foreignKey: 'product_id' })
 
+Table.hasMany(Order, { foreignKey: 'table_id' })
+Order.belongsTo(Table, { foreignKey: 'table_id' })
+
 export default {
   User,
   Employee,
@@ -47,7 +51,8 @@ export default {
   Category,
   Discount,
   Order,
-  OrderDetail
+  OrderDetail,
+  Table
 }
 
 export {
@@ -60,5 +65,6 @@ export {
   Category,
   Discount,
   Order,
-  OrderDetail
+  OrderDetail,
+  Table
 }

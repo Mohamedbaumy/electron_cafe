@@ -4,16 +4,11 @@ import { createHashRouter, RouterProvider, Link, useRouteError } from 'react-rou
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import axios from 'axios'
 import App from './App'
-// import Register from './features/auth/index'
-import Employees from './features/employees/Employees'
-import Customers from './features/customers/Customers'
-import Products from './features/products/Products'
-import Categories from './features/categories/Categories'
-import Orders from './features/orders/Orders'
-import OrderDetails from './features/orderDetails/OrderDetails'
-import { AuthProvider } from './context/AuthContext'
+
 import { Result, Button } from 'antd'
 import './index.css'
+
+import Home from '@features/home/Home'
 
 const queryClient = new QueryClient()
 
@@ -59,32 +54,9 @@ const router = createHashRouter([
     children: [
       {
         path: '/',
-        element: <h1>Hello Cafe</h1>
+        element: <Home />
       },
-      {
-        path: '/employees',
-        element: <Employees />
-      },
-      {
-        path: '/customers',
-        element: <Customers />
-      },
-      {
-        path: '/products',
-        element: <Products />
-      },
-      {
-        path: '/categories',
-        element: <Categories />
-      },
-      {
-        path: '/orders',
-        element: <Orders />
-      },
-      {
-        path: '/order-details',
-        element: <OrderDetails />
-      },
+
       {
         path: '/403',
         element: (

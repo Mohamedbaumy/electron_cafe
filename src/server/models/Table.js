@@ -1,30 +1,24 @@
 import { DataTypes } from 'sequelize'
 import sequelize from '../config/db.js'
 
-const User = sequelize.define(
-  'User',
+const Table = sequelize.define(
+  'Table',
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    username: {
+    name: {
       type: DataTypes.STRING,
       unique: true
     },
-    password: DataTypes.STRING,
-    name: DataTypes.STRING,
-    role: {
-      type: DataTypes.ENUM,
-      values: ['employee', 'customer']
-    },
-    phone: DataTypes.STRING
+    capacity: DataTypes.INTEGER
   },
   {
-    tableName: 'users',
+    tableName: 'tables',
     timestamps: false
   }
 )
 
-export default User
+export default Table
